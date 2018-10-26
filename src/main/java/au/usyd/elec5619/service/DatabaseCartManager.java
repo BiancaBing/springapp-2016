@@ -13,39 +13,31 @@ import org.springframework.transaction.annotation.Transactional;
 import au.usyd.elec5619.dao.CartItemDao;
 import au.usyd.elec5619.domain.Cart;
 
-@Service(value="productManager")
+@Service(value="cartManager")
 @Transactional
 public class DatabaseCartManager implements CartManager {
 	
-	@Resource
-	private CartItemDao m;
-	private SessionFactory sessionFactory;
-	
 	@Autowired
-	public void setSessionFactory(SessionFactory sf) {
-		this.sessionFactory = sf;
-		//m.setSessionFactory(sf);
-	}
+	private CartItemDao m;
+	
 	
 	@Override
-	public void addCart(Cart product) {
-		this.sessionFactory.getCurrentSession().save(product);
+	public void addCart(Cart cart) {
+		m.saveItem(cart);
 		//m.saveItem(product);
 	}
 	
 	@Override
 	public Cart getCartById(int id) {
-		Session currentSession = this.sessionFactory.getCurrentSession();
-		Cart product = (Cart) currentSession.get(Cart.class, id);
-		//return m.getItemById(id);
-		return product;
+		
+		return m.getItemById(id);
+		
 	}
 	
 	@Override
-	public void updateCart(Cart product) {
-		Session currentSession = this.sessionFactory.getCurrentSession();
-		currentSession.merge(product);
-		//m.updateItem(product);
+	public void updateCart(Cart cart) {
+		
+		m.updateItem(cart);
 	}
 	
 	
@@ -60,8 +52,13 @@ public class DatabaseCartManager implements CartManager {
 
 	@Override
 	public List<Cart> getCarts() {
-		return this.sessionFactory.getCurrentSession().createQuery("FROM Cart").list();
-		//return m.getCarts();
+		//return sessionFactory.getCurrentSession().createQuery("FROM Cart").list();
+		return m.getCarts();
+	}
+
+	@Override
+	public Cart editQuantity(int quantity,int id) {
+		return m.editQuantity(quantity, id);
 	}
 
 }

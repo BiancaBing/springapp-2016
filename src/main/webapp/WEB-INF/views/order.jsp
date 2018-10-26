@@ -2,63 +2,38 @@
 <html>
 	<head>
 		<title><fmt:message key="title" /></title>
-	
+		
+		<style type="css">
+			
+		</style>
 	</head>
 	
 	
 	<body>
-	<!--  
-		<script type="text/javascript">
-			function confirmDialog(){
-				if(confirm("checkout?")){
-					alert("Continue");
-					return true;
-				}
-				else{
-					alert("Bye");
-					return false;
-				}
-			}
-		</script>
-	 -->
-	
-		<a href="cart.htm">cart</a> | <a href="order.html">order</a> | <a href="sales.html">sales record</a>
-		<form action="demo_form.php"method="get">
-			<input type="search" name="search1"/>
-			<input type="submit" value="search" />
-		</form>
-		<h1>
-			<fmt:message key="heading" />
-		</h1>
+		
+		<a href="cart.htm">cart</a> | <a href="order.htm">order</a> | <a href="sales.htm">sales record</a>
+		<h1>My Order</h1>
 		<p>
 			<fmt:message key="greeting" />
 			<c:out value="${model.now}" />
 		</p>
-		<h3>Products</h3>
-		<sf:form method="POST" modelAttribute="product">
-		<c:forEach items="${model.products}" var="prod">
-			<input name="cart" type="checkbox" value=""/>
-				<c:out value="${prod.description}" />
-				<i>$<c:out value="${prod.price}" /></i>
-			<a href="product/edit/${prod.id }">edit</a>
-			<a href="product/delete/${prod.id }">delete</a>             
-			<input type="submit" value="search" />
+		<h3>Items</h3>
+		<sf:form method="POST" modelAttribute="order">
+		<c:forEach items="${model.orders}" var="ord">
+				<c:out value="name: ${ord.name}" /> | 
+				<c:out value="description: ${ord.description}" /> | 
+				<c:out value="quantity: ${ord.quantity}" /> | 
+				<c:out value="status: ${ord.status}" /> | 
+				<i>$<c:out value="price: ${ord.price}" /></i>
+			<a href="order/edit/${ord.id }">edit</a>
+			<a href="order/delete/${ord.id }">cancel</a>             
+			<input type="submit" value="" />
 			<br>
 			<br>
 		</c:forEach>
-		<label><input name="select all" type="checkbox" value="all"/>select all</label>
+				
+		<!-- <label><input name="select all" type="checkbox" value="all"/>select all</label> -->
 		</sf:form>
-		
-		<div style="margin-top:50px">
-			<!-- a href="javascript:confirmDialog();">checkout</a-->
-			<!-- input type="button" value="confirm" onclick="confirmDialog"/-->
-		</div>
-		
-		<a href="product/add/${prod.id }">add</a>
-		
-		<!-- link to the increase price page -->
-		<br>
-		<a href="<c:url value="priceincrease.htm"/>">Increase Prices</a>
-		<br>
+	
 	</body>
 </html>

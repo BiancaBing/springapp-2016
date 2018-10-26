@@ -9,12 +9,14 @@ public interface CartManager extends Serializable{
     
     public List<Cart> getCarts();
     
-    public void addCart(Cart product);
+    public void addCart(Cart cart);
     
     public Cart getCartById(int id);
     
-    public void updateCart(Cart product);
+    public void updateCart(Cart cart);
     
     public void deleteCart(int id);
+        
+    public Cart editQuantity(int quantity,int id);
     
 }

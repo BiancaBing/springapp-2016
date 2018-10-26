@@ -20,6 +20,9 @@ public class Orders implements Serializable{
 	@Column(name="description")
     private String description;
 	
+	@Column(name="name")
+    private String name;
+	
 	@Column(name="quantity")
 	private int quantity;
 	
@@ -52,6 +55,14 @@ public class Orders implements Serializable{
     
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
     
     public Double getPrice() {
@@ -111,6 +122,7 @@ public class Orders implements Serializable{
         buffer.append("Location: " + location);
         buffer.append("Time: " + time);
         buffer.append("Contact: " + contact);
+        buffer.append("Name: " + name);
         return buffer.toString();
     }
 }

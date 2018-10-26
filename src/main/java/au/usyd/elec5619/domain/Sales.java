@@ -21,6 +21,9 @@ public class Sales implements Serializable{
 	@Column(name="description")
     private String description;
 	
+	@Column(name="name")
+    private String name;
+	
 	@Column(name="quantity")
 	private int quantity;
 	
@@ -98,6 +101,14 @@ public class Sales implements Serializable{
         this.location = location;
     }
     
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public String getTime() {
         return time;
     }
@@ -124,6 +135,7 @@ public class Sales implements Serializable{
         buffer.append("Location: " + location);
         buffer.append("Time: " + time);
         buffer.append("Contact: " + contact);
+        buffer.append("Name: " + name);
         return buffer.toString();
     }
 }

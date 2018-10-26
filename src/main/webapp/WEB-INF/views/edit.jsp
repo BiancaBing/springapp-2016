@@ -10,20 +10,22 @@
 	<body>
 			
 		<h1>You can edit the product shown below</h1>
-		<sf:form method="POST" modelAttribute="product">
+		<sf:form method="POST" modelAttribute="cart">
 			<fieldset>
 				<table>
 					<tr>
-						<th><label for="product_description">Description:</label></th>
-						<td><sf:input path="description"/></td>
+						<!--<th><label for="cart_description">Description:</label></th>-->
+						<!--<td><sf:input path="description"/></td> -->
+						<th><label for="cart_quantity">Quantity:</label></th>
+						<td><sf:input path="quantity"/></td> 
 					</tr>
 					<tr>
-						<th><label for="product_seller">Seller:</label></th>
-						<td><sf:input path="seller"/></td>
+						<!--<th><label for="cart_seller">Seller:</label></th>-->
+						<!--<td><sf:input path="seller"/></td>-->
 					</tr>
 					<tr>
-						<th><label for="product_price">Price</label></th>
-						<td><sf:input path="price"/></td>
+						<!--<th><label for="cart_price">Price</label></th>-->
+						<!--<td><sf:input path="price"/></td>-->
 					</tr>
 					<tr>
 						<th><a href="cart.htm"><button>Cancel</button></a></th>

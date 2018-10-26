@@ -43,11 +43,11 @@
     </beans:bean>
 	
 	<beans:bean name="/cart.htm" class="au.usyd.elec5619.web.CartController">
-		<beans:property name="productManager" ref="productManager"/>
+		<beans:property name="cartManager" ref="cartManager"/>
 	</beans:bean>
 	
 	<beans:bean name="/order.htm" class="au.usyd.elec5619.web.OrderController">
-    	<beans:property name="productManager" ref="productManager"/>
+    	<beans:property name="orderManager" ref="orderManager"/>
     </beans:bean>
     
     <beans:bean name="/sales.htm" class="au.usyd.elec5619.web.SalesController">

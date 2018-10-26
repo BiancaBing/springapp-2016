@@ -13,13 +13,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-import au.usyd.elec5619.service.CartManager;
+import au.usyd.elec5619.service.OrderManager;
 
 public class OrderController implements Controller {
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 
-    private CartManager productManager;
+    private OrderManager orderManager;
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,14 +29,14 @@ public class OrderController implements Controller {
 
         Map<String, Object> myModel = new HashMap<String, Object>();
         myModel.put("now", now);
-        myModel.put("products", this.productManager.getCarts());
+        myModel.put("orders", this.orderManager.getOrders());
 
-        return new ModelAndView("WEB-INF/views/order.jsp", "now", now);
+        return new ModelAndView("order",  "model", myModel);
     }
 
 
-    public void setProductManager(CartManager productManager) {
-        this.productManager = productManager;
+    public void setOrderManager(OrderManager orderManager) {
+        this.orderManager = orderManager;
     }
 
 }

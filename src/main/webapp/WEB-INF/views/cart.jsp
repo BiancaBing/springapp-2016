@@ -1,26 +1,19 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 	<head>
 		<title><fmt:message key="title" /></title>
-	
+		
+		<style type="css">
+			
+		</style>
 	</head>
 	
 	
 	<body>
-	  
-		<!--  <script type="text/javascript">
-			function confirmDialog(){
-				if(confirm("checkout?")){
-					alert("Continue");
-					return true;
-				}
-				else{
-					alert("Bye");
-					return false;
-				}
-			}
-		</script>  -->
-		
+	
 	 	<script language="JavaScript">
 	 		function selectall(source) {
 	 		  checkboxes = document.getElementsByName('foo');
@@ -29,12 +22,8 @@
 	 		  }
 	 		}
 		</script>
-	
-		<a href="cart.htm">cart</a> | <a href="order.html">order</a> | <a href="sales.html">sales record</a>
-		<form action="demo_form.php"method="get">
-			<input type="search" name="search1"/>
-			<input type="submit" value="search" />
-		</form>
+		
+		<a href="cart.htm">cart</a> | <a href="order.htm">order</a> | <a href="sales.htm">sales record</a>
 		<h1>
 			<fmt:message key="heading" />
 		</h1>
@@ -42,35 +31,32 @@
 			<fmt:message key="greeting" />
 			<c:out value="${model.now}" />
 		</p>
-		<h3>Products</h3>
-		<sf:form method="POST" modelAttribute="product">
-		<c:forEach items="${model.products}" var="prod">
-			<input name="foo" type="checkbox" value=""/>
-				<c:out value="${prod.description}" />
-				<c:out value="seller: ${prod.seller}" />
-				<i>$<c:out value="${prod.price}" /></i>
-			<a href="product/edit/${prod.id }">edit</a>
-			<a href="product/delete/${prod.id }">delete</a>             
-			<input type="submit" value="search" />
+		<h3>Items</h3>
+		<sf:form method="POST" modelAttribute="cart">
+		<c:forEach items="${model.carts}" var="prod">
+			<input name="foo" type="checkbox" value="${prod.id}"/>
+				<c:out value="name: ${prod.name}" /> | 
+				<c:out value="description: ${prod.description}" /> | 
+				<c:out value="seller: ${prod.seller}" /> |
+				<c:out value="quantity: ${prod.quantity}" /> | 
+				<i>$<c:out value="price: ${prod.price}" /></i>
+			<a href="cart/edit/${prod.id }">edit</a>
+			<a href="cart/delete/${prod.id }">delete</a>             
 			<br>
+			<a href="cart/checkout/${prod.id }">checkout</a>
 			<br>
 		</c:forEach>
+		
+		
 		
 		<input type="checkbox" onClick="selectall(this)" /> Select All<br/>
 		
 		<!-- <label><input name="select all" type="checkbox" value="all"/>select all</label> -->
 		</sf:form>
 		
-		<div style="margin-top:50px">
-			<form action="add" method="post">
-				Location: <input type="text" name="location"/>
-				Time: <input type="text" name="time"/>
-				Contact: <input type="text" name="contact"/>
-				<input type="submit" value="Checkout"/>
-			</form>
-		</div>
+				<a href="cart/checkout">checkout</a>
 		
-		<a href="product/add/${prod.id }">add</a>
+		<a href="cart/add/${prod.id }">add</a>
 	
 	</body>
 </html>
