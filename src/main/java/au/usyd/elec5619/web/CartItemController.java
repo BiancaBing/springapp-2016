@@ -48,7 +48,7 @@ public class CartItemController {
 	}
 	
 	
-	@RequestMapping(value="/checkout/**", method=RequestMethod.POST)
+	@RequestMapping(value="/checkout/checkout", method=RequestMethod.POST)
 	public String checkout(HttpServletRequest httpServletRequest) {	
 		if(ids != 0) {
 				Orders order = new Orders();
@@ -62,7 +62,7 @@ public class CartItemController {
 				order.setContact(httpServletRequest.getParameter("contact"));
 				this.orderManager.addOrder(order);
         }
-		return "order.htm";
+		return "redirect:/order.htm";
 	}
 
 	@RequestMapping(value="/add")
