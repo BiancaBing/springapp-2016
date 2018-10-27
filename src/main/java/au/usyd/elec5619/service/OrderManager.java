@@ -16,5 +16,7 @@ public interface OrderManager extends Serializable{
     public void updateOrder(Orders order);
     
     public void deleteOrder(int id);
+    
+    public void changeState(String state, int id);
         
 }

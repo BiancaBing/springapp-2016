@@ -25,9 +25,8 @@
 				<c:out value="quantity: ${ord.quantity}" /> | 
 				<c:out value="status: ${ord.status}" /> | 
 				<i>$<c:out value="price: ${ord.price}" /></i>
-			<a href="order/edit/${ord.id }">edit</a>
-			<a href="order/delete/${ord.id }">cancel</a>             
-			<input type="submit" value="" />
+			<!--<a href="order/edit/${ord.id }">edit</a> -->			      
+			<th><a href="order/change/${ord.id }"><input type="button" value="${ord.review}" /></a></th>        
 			<br>
 			<br>
 		</c:forEach>

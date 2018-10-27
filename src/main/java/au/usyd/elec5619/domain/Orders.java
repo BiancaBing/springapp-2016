@@ -20,6 +20,9 @@ public class Orders implements Serializable{
 	@Column(name="description")
     private String description;
 	
+	@Column(name="review")
+    private String review;
+	
 	@Column(name="name")
     private String name;
 	
@@ -55,6 +58,14 @@ public class Orders implements Serializable{
     
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public String getReview() {
+        return review;
+    }
+    
+    public void setReview(String review) {
+        this.review = review;
     }
     
     public String getName() {

@@ -47,4 +47,21 @@ public class DatabaseOrderManager implements OrderManager{
 		o.deleteItem(id);
 	}
 
+	@Override
+	public void changeState(String state, int id) {
+		Orders orders = o.getItemById(id);
+		if(state.equals("Not confirmed")) {
+			orders.setStatus("Not completed");
+			orders.setReview("Cancel");
+		}
+		else if(state.equals("Not completed")) {
+			orders.setStatus("Delivered");
+			orders.setReview("Complete");
+		}
+		else if(state.equals("Delivered")) {
+			orders.setReview("Please enter the review");
+		}
+		
+	}
+
 }

@@ -36,6 +36,8 @@ public class CartController implements Controller {
         Map<String, Object> myModel = new HashMap<String, Object>();
         myModel.put("now", now);
         myModel.put("carts", this.cartManager.getCarts());
+        //String message = "Uploaded! ";      
+        //request.getSession().setAttribute("mes", message);
         //myModel.put("items", items);
         return new ModelAndView("cart", "model", myModel);
     }

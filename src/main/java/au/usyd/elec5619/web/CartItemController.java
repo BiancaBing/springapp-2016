@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import au.usyd.elec5619.dao.CartItemDao;
 import au.usyd.elec5619.domain.Cart;
 import au.usyd.elec5619.domain.Orders;
 import au.usyd.elec5619.service.CartManager;
@@ -39,7 +38,7 @@ public class CartItemController {
 	private CartManager cartManager;
 	@Resource(name="orderManager")
 	private OrderManager orderManager;
-	private int ids = 0;
+	private int ids=0;
 	
 	@RequestMapping(value="/checkout/{id}")
 	public String checkout(@PathVariable("id") int id, Model uiModel) {
@@ -57,13 +56,42 @@ public class CartItemController {
 				order.setPrice(this.cartManager.getCartById(ids).getPrice());
 				order.setName(this.cartManager.getCartById(ids).getName());
 				order.setStatus("Not confirmed");
+				order.setReview("Cancel");
 				order.setLocation(httpServletRequest.getParameter("location"));
 				order.setTime(httpServletRequest.getParameter("time"));
 				order.setContact(httpServletRequest.getParameter("contact"));
 				this.orderManager.addOrder(order);
         }
+		
 		return "redirect:/order.htm";
 	}
+
+	
+	/*@RequestMapping(value="/checkout")
+	public String checkout(@RequestParam("foo") int id[], Model uiModel) {
+		ids=id;
+		return "checkout";
+	}
+	
+	
+	@RequestMapping(value="/checkout/checkout", method=RequestMethod.POST)
+	public String checkout(HttpServletRequest httpServletRequest) {	
+		if(ids != null) {
+			for(int i=0;i<ids.length;i++) {
+				Orders order = new Orders();
+				order.setDescription(this.cartManager.getCartById(ids[i]).getDescription());
+				order.setQuantity(this.cartManager.getCartById(ids[i]).getQuantity());
+				order.setPrice(this.cartManager.getCartById(ids[i]).getPrice());
+				order.setName(this.cartManager.getCartById(ids[i]).getName());
+				order.setStatus("Not confirmed");
+				order.setLocation(httpServletRequest.getParameter("location"));
+				order.setTime(httpServletRequest.getParameter("time"));
+				order.setContact(httpServletRequest.getParameter("contact"));
+				this.orderManager.addOrder(order);
+			}
+        }
+		return "redirect:/order.htm";
+	}*/
 
 	@RequestMapping(value="/add")
 	public String addCart(Model uiModel) {
