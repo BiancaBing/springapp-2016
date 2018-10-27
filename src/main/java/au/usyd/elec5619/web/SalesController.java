@@ -14,7 +14,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-import au.usyd.elec5619.domain.Sales;
 import au.usyd.elec5619.service.SaleManager;
 
 public class SalesController implements Controller{

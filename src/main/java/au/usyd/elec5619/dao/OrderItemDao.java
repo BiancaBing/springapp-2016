@@ -9,7 +9,7 @@ import org.hibernate.classic.Session;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import au.usyd.elec5619.domain.Orders;
+import au.usyd.elec5619.domain.OrderTable;
 
 @Repository(value = "orderItemDao")
 public class OrderItemDao {
@@ -24,36 +24,43 @@ public class OrderItemDao {
         this.sessionFactory = sessionFactory;
     }
 
-    public void saveItem(Orders order) {
+    public void saveItem(OrderTable order) {
         sessionFactory.getCurrentSession().save(order);
     }
     
-    public Orders editQuantity(int quantity,int id) {
+    public OrderTable editQuantity(int quantity,int id) {
     	Session currentSession = this.sessionFactory.getCurrentSession();
-    	Orders c = (Orders) currentSession.get(Orders.class, id);
+    	OrderTable c = (OrderTable) currentSession.get(OrderTable.class, id);
 		c.setQuantity(quantity);
 		return c;
 	}
     
-    public Orders getItemById(int id) {
+    public OrderTable getItemById(int id) {
     	Session currentSession = this.sessionFactory.getCurrentSession();
-    	Orders order = (Orders) currentSession.get(Orders.class, id);
+    	OrderTable order = (OrderTable) currentSession.get(OrderTable.class, id);
     	return order;	
     }
     
-    public void updateItem(Orders order) {
+    public void updateItem(OrderTable order) {
 		Session currentSession = this.sessionFactory.getCurrentSession();
 		currentSession.merge(order);
 	}
     
     public void deleteItem(int id) {
 		Session currentSession = this.sessionFactory.getCurrentSession();
-		Orders order = (Orders) currentSession.get(Orders.class, id);
+		OrderTable order = (OrderTable) currentSession.get(OrderTable.class, id);
 		currentSession.delete(order);
 	}
 	
-	public List<Orders> getOrders() {
-		return this.sessionFactory.getCurrentSession().createQuery("FROM Orders").list();
+	public List<OrderTable> getOrders() {
+		return this.sessionFactory.getCurrentSession().createQuery("FROM OrderTable").list();
 	}
 	
+	public List<OrderTable> findOrdersbySellerId(int id) {
+		String sql = "SELECT * from ordertable where seller_id =" + id;
+		
+		return this.sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(OrderTable.class).list();
+	}
+	
+
 }

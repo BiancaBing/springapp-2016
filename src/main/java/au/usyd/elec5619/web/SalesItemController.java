@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import au.usyd.elec5619.domain.Cart;
-import au.usyd.elec5619.domain.Orders;
-import au.usyd.elec5619.domain.Sales;
+import au.usyd.elec5619.domain.OrderTable;
 import au.usyd.elec5619.service.CartManager;
 import au.usyd.elec5619.service.OrderManager;
 import au.usyd.elec5619.service.SaleManager;
@@ -35,7 +34,7 @@ public class SalesItemController {
 	@RequestMapping(value="/change/{id}/**", method=RequestMethod.GET)
 	public String ChangeState(@PathVariable("id") int id,Model uiModel) {
 		
-		Sales s = this.saleManager.getSaleById(id);
+		OrderTable s = this.saleManager.getSaleById(id);
 		String state = s.getStatus();
 		if(state.equals("Delivered")) {
 			this.saleManager.changeState(state, id);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import au.usyd.elec5619.dao.OrderItemDao;
-import au.usyd.elec5619.domain.Orders;
+import au.usyd.elec5619.domain.OrderTable;
 
 @Service(value="orderManager")
 @Transactional
@@ -17,25 +17,25 @@ public class DatabaseOrderManager implements OrderManager{
 	private OrderItemDao o;
 	
 	@Override
-	public List<Orders> getOrders() {
+	public List<OrderTable> getOrders() {
 		
 		return o.getOrders();
 	}
 
 	@Override
-	public void addOrder(Orders order) {
+	public void addOrder(OrderTable order) {
 		
 		o.saveItem(order);
 	}
 
 	@Override
-	public Orders getOrderById(int id) {
+	public OrderTable getOrderById(int id) {
 
 		return o.getItemById(id);
 	}
 
 	@Override
-	public void updateOrder(Orders order) {
+	public void updateOrder(OrderTable order) {
 		
 		o.updateItem(order);
 		
@@ -49,7 +49,7 @@ public class DatabaseOrderManager implements OrderManager{
 
 	@Override
 	public void changeState(String state, int id) {
-		Orders orders = o.getItemById(id);
+		OrderTable orders = o.getItemById(id);
 		if(state.equals("Not confirmed")) {
 			orders.setStatus("Not completed");
 			orders.setReview("Cancel");

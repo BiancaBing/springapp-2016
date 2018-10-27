@@ -13,6 +13,9 @@
 			Description: <input type="text" name="description"/>
 			Price: <input type="text" name="price"/>
 			Seller: <input type="text" name="seller"/>
+			Name: <input type="text" name="name"/>
+			Customer_id: <input type="text" name="customer_id"/>
+			Seller_id: <input type="text" name="seller_id"/>
 			<input type="submit" value="Add"/>
 		</form>
 	</body>

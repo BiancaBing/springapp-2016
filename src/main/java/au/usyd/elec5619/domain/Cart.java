@@ -17,6 +17,12 @@ public class Cart implements Serializable {
 	@Column(name="cart_id")
 	private int cart_id;
 	
+	@Column(name="seller_id")
+    private int seller_id;
+	
+	@Column(name="customer_id")
+    private int customer_id;
+	
 	@Column(name="description")
     private String description;
 	
@@ -38,6 +44,22 @@ public class Cart implements Serializable {
 
 	public void setId(int cart_id) {
 		this.cart_id = cart_id;
+	}
+	
+	public int getSellerId() {
+		return seller_id;
+	}
+
+	public void setSellerId(int seller_id) {
+		this.seller_id = seller_id;
+	}
+	
+	public int getCustomerId() {
+		return customer_id;
+	}
+
+	public void setCustomerId(int customer_id) {
+		this.customer_id = customer_id;
 	}
 
 	public String getDescription() {
@@ -87,6 +109,8 @@ public class Cart implements Serializable {
         buffer.append("Price: " + price);
         buffer.append("Seller: " + seller);
         buffer.append("Name: " + name);
+        buffer.append("seller_id: " + seller_id);
+        buffer.append("customer_id: " + customer_id);
         return buffer.toString();
     }
 }

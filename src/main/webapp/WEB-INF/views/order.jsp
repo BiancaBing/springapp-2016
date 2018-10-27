@@ -1,4 +1,7 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 	<head>
 		<title><fmt:message key="title" /></title>
@@ -25,13 +28,11 @@
 				<c:out value="quantity: ${ord.quantity}" /> | 
 				<c:out value="status: ${ord.status}" /> | 
 				<i>$<c:out value="price: ${ord.price}" /></i>
-			<!--<a href="order/edit/${ord.id }">edit</a> --> 			      
 			<th><a href="order/change/${ord.id }"><input type="button" value="${ord.review}" /></a></th>        
 			<br>
 			<br>
 		</c:forEach>
 				
-		<!-- <label><input name="select all" type="checkbox" value="all"/>select all</label> -->
 		</sf:form>
 	
 	</body>

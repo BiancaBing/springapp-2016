@@ -30,7 +30,7 @@ public class OrderController implements Controller {
         Map<String, Object> myModel = new HashMap<String, Object>();
         myModel.put("now", now);
         myModel.put("orders", this.orderManager.getOrders());
-        
+
         return new ModelAndView("order",  "model", myModel);
     }
 

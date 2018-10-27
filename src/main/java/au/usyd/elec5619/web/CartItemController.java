@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import au.usyd.elec5619.domain.Cart;
-import au.usyd.elec5619.domain.Orders;
+import au.usyd.elec5619.domain.OrderTable;
 import au.usyd.elec5619.service.CartManager;
 import au.usyd.elec5619.service.OrderManager;
 
@@ -50,13 +50,16 @@ public class CartItemController {
 	@RequestMapping(value="/checkout/checkout", method=RequestMethod.POST)
 	public String checkout(HttpServletRequest httpServletRequest) {	
 		if(ids != 0) {
-				Orders order = new Orders();
+				OrderTable order = new OrderTable();
 				order.setDescription(this.cartManager.getCartById(ids).getDescription());
 				order.setQuantity(this.cartManager.getCartById(ids).getQuantity());
 				order.setPrice(this.cartManager.getCartById(ids).getPrice());
 				order.setName(this.cartManager.getCartById(ids).getName());
 				order.setStatus("Not confirmed");
 				order.setReview("Cancel");
+				order.setItemId(ids);
+				order.setSellerId(this.cartManager.getCartById(ids).getSellerId());
+				order.setCustomerId(this.cartManager.getCartById(ids).getCustomerId());
 				order.setLocation(httpServletRequest.getParameter("location"));
 				order.setTime(httpServletRequest.getParameter("time"));
 				order.setContact(httpServletRequest.getParameter("contact"));
@@ -106,6 +109,10 @@ public class CartItemController {
 		cart.setDescription(httpServletRequest.getParameter("description"));
 		cart.setPrice(Double.valueOf(httpServletRequest.getParameter("price")));
 		cart.setSeller(httpServletRequest.getParameter("seller"));
+		cart.setName(httpServletRequest.getParameter("name"));
+		cart.setCustomerId(Integer.parseInt(httpServletRequest.getParameter("customer_id")));
+		cart.setSellerId(Integer.parseInt(httpServletRequest.getParameter("seller_id")));
+		
 		this.cartManager.addCart(cart);
 		
 		return "redirect:/cart.htm";

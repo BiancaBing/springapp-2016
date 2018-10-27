@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import au.usyd.elec5619.domain.Orders;
+import au.usyd.elec5619.domain.OrderTable;
 import au.usyd.elec5619.service.OrderManager;
 
 @Controller
@@ -36,7 +36,7 @@ public class OrderItemController {
 	@RequestMapping(value="/change/{id}/**", method=RequestMethod.GET)
 	public String ChangeState(@PathVariable("id") int id,Model uiModel) {
 		
-		Orders o = this.orderManager.getOrderById(id);
+		OrderTable o = this.orderManager.getOrderById(id);
 		String state = o.getStatus();
 		if(state.equals("Delivered")) {
 			this.orderManager.changeState(state, id);

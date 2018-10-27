@@ -18,14 +18,13 @@
 			<c:out value="${model.now}" />
 		</p>
 		<h3>Items</h3>
-		<sf:form method="POST" modelAttribute="order">
+		<sf:form method="POST" modelAttribute="sale">
 		<c:forEach items="${model.sales}" var="sal">
 				<c:out value="name: ${sal.name}" /> | 
 				<c:out value="description: ${sal.description}" /> | 
 				<c:out value="quantity: ${sal.quantity}" /> | 
 				<c:out value="status: ${sal.status}" /> | 
 				<i>$<c:out value="price: ${sal.price}" /></i>
-			<!--<a href="order/edit/${ord.id }">edit</a> --> 			      
 			<th><a href="order/change/${sal.id }"><input type="button" value="${sal.review}" /></a></th>        
 			<br>
 			<br>

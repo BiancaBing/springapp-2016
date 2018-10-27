@@ -3,17 +3,17 @@ package au.usyd.elec5619.service;
 import java.io.Serializable;
 import java.util.List;
 
-import au.usyd.elec5619.domain.Sales;
+import au.usyd.elec5619.domain.OrderTable;
 
 public interface SaleManager extends Serializable{
 
-    public List<Sales> getSales();
+    public List<OrderTable> getSales();
     
-    public void addSale(Sales order);
+    public void addSale(OrderTable order);
     
-    public Sales getSaleById(int id);
+    public OrderTable getSaleById(int id);
     
-    public void updateSale(Sales order);
+    public void updateSale(OrderTable order);
     
     public void deleteSale(int id);
     

@@ -20,6 +20,8 @@ public class CartItemDao {
 	@Resource
     private SessionFactory sessionFactory;
 	private JdbcTemplate jdbcTemplate;
+	
+	public int user_id=233;
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;
