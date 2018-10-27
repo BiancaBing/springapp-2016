@@ -50,7 +50,8 @@
     	<beans:property name="orderManager" ref="orderManager"/>
     </beans:bean>
     
-    <beans:bean name="/sales.htm" class="au.usyd.elec5619.web.SalesController">
+    <beans:bean name="/sale.htm" class="au.usyd.elec5619.web.SalesController">
+    	<beans:property name="saleManager" ref="saleManager"/>
     </beans:bean>
     
     

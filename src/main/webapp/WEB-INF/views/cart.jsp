@@ -32,7 +32,7 @@
 	 			        }  
 		</script>
 		
-		<a href="cart.htm">cart</a> | <a href="order.htm">order</a> | <a href="sales.htm">sales record</a>
+		<a href="cart.htm">cart</a> | <a href="order.htm">order</a> | <a href="sale.htm">sales record</a>
 		<h1>
 			<fmt:message key="heading" />
 		</h1>
