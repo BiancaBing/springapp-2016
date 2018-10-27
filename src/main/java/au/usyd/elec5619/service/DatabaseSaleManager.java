@@ -35,8 +35,7 @@ public class DatabaseSaleManager implements SaleManager{
 
 	@Override
 	public List<OrderTable> getSales() {
-		//int userid=233;
-		return o.findOrdersbySellerId(233);
+		return o.findOrdersbySellerId();
 		//return o.getOrders();
 	}
 

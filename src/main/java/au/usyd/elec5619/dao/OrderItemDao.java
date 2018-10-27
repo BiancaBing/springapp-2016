@@ -56,7 +56,13 @@ public class OrderItemDao {
 		return this.sessionFactory.getCurrentSession().createQuery("FROM OrderTable").list();
 	}
 	
-	public List<OrderTable> findOrdersbySellerId(int id) {
+	public int userid() {
+		String sql = "SELECT customer_id from cart";
+		return 233;
+	}
+	
+	public List<OrderTable> findOrdersbySellerId() {
+		int id=this.userid();
 		String sql = "SELECT * from ordertable where seller_id =" + id;
 		
 		return this.sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(OrderTable.class).list();
