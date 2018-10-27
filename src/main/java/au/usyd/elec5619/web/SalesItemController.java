@@ -38,17 +38,14 @@ public class SalesItemController {
 		String state = s.getStatus();
 		if(state.equals("Delivered")) {
 			this.saleManager.changeState(state, id);
-			System.out.println("sssss");
 			return "review_customer";
 		}
 		else if(state.equals("Not confirmed")) {
 			this.saleManager.changeState(state, id);
-			System.out.println("sssss");
 			this.saleManager.deleteSale(id);
 		}
 		else if(state.equals("Not completed")) {
 			this.saleManager.changeState(state, id);
-			System.out.println("sssss");
 		}
 		System.out.println(id);
 		System.out.println(state);

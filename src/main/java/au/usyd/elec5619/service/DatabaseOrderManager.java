@@ -52,14 +52,14 @@ public class DatabaseOrderManager implements OrderManager{
 		OrderTable orders = o.getItemById(id);
 		if(state.equals("Not confirmed")) {
 			orders.setStatus("Not completed");
-			orders.setReview("Cancel");
+			orders.setReview("Complete");
 		}
 		else if(state.equals("Not completed")) {
 			orders.setStatus("Delivered");
-			orders.setReview("Complete");
+			orders.setReview("Please enter the review");
 		}
 		else if(state.equals("Delivered")) {
-			orders.setReview("Please enter the review");
+			
 		}
 		
 	}

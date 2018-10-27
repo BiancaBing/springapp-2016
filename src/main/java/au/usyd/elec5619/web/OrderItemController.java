@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import au.usyd.elec5619.domain.Cart;
 import au.usyd.elec5619.domain.OrderTable;
 import au.usyd.elec5619.service.OrderManager;
 
@@ -40,22 +41,28 @@ public class OrderItemController {
 		String state = o.getStatus();
 		if(state.equals("Delivered")) {
 			this.orderManager.changeState(state, id);
-			System.out.println("sssss");
+			uiModel.addAttribute("order", o);
 			return "review_customer";
 		}
 		else if(state.equals("Not confirmed")) {
 			this.orderManager.changeState(state, id);
-			System.out.println("sssss");
 			this.orderManager.deleteOrder(id);
 		}
 		else if(state.equals("Not completed")) {
 			this.orderManager.changeState(state, id);
-			System.out.println("sssss");
 		}
 		System.out.println(id);
 		System.out.println(state);
 		return "redirect:/order.htm";
 		
+	}
+	
+	@RequestMapping(value="/change/review", method=RequestMethod.POST)
+	public String addReview(HttpServletRequest httpServletRequest, @ModelAttribute("review") OrderTable o) {
+		
+		String review=httpServletRequest.getParameter("review");
+		o.setReview(review);
+		return "redirect:/order.htm";
 	}
 	
 /*	@RequestMapping(value="/change/{id}/{status}", method=RequestMethod.GET)
