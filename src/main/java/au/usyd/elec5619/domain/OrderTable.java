@@ -35,6 +35,12 @@ public class OrderTable implements Serializable{
 	@Column(name="status")
 	private String status;
 	
+	@Column(name="orderprint")
+	private String orderprint;
+	
+	@Column(name="saleprint")
+	private String saleprint;
+	
 	@Column(name="review")
     private String review;
 	
@@ -56,7 +62,7 @@ public class OrderTable implements Serializable{
 	public int getId() {
 		return order_id;
 	}
-
+	
 	public void setId(int order_id) {
 		this.order_id = order_id;
 	}
@@ -131,6 +137,34 @@ public class OrderTable implements Serializable{
     
     public void setStatus(String status) {
         this.status = status;
+        if(status.equals("Not confirmed")) {
+			setOrderprint("Cancel");
+			setSaleprint("View the order details");
+		}
+		else if(status.equals("Not completed")) {
+			setOrderprint("Complete");
+			setSaleprint("View the order details");
+		}
+		else if(status.equals("Delivered")) {
+			setOrderprint("Please enter the review");
+			setSaleprint("View the product review");
+		}
+    }
+    
+    public String getOrderprint() {
+        return orderprint;
+    }
+    
+    public void setOrderprint(String orderprint) {
+        this.orderprint = orderprint;
+    }
+    
+    public String getSaleprint() {
+        return saleprint;
+    }
+    
+    public void setSaleprint(String saleprint) {
+        this.saleprint = saleprint;
     }
     
     public String getReview() {

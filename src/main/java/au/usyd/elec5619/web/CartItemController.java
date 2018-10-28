@@ -39,12 +39,21 @@ public class CartItemController {
 	@Resource(name="orderManager")
 	private OrderManager orderManager;
 	private int ids=0;
+	String[] select=null;
 	
 	@RequestMapping(value="/checkout/{id}")
 	public String checkout(@PathVariable("id") int id, Model uiModel) {
 		ids=id;
 		return "checkout";
 	}
+	
+/*	@RequestMapping(value="/checkout")
+	public String checkout( Model uiModel,HttpServletRequest httpServletRequest) {
+		//ids=id;
+		select=httpServletRequest.getParameterValues("foo");
+		System.out.println(select[1]);
+		return "checkout";
+	}*/
 	
 	
 	@RequestMapping(value="/checkout/checkout", method=RequestMethod.POST)
@@ -56,7 +65,6 @@ public class CartItemController {
 				order.setPrice(this.cartManager.getCartById(ids).getPrice());
 				order.setName(this.cartManager.getCartById(ids).getName());
 				order.setStatus("Not confirmed");
-				order.setReview("Cancel");
 				order.setItemId(ids);
 				order.setSellerId(this.cartManager.getCartById(ids).getSellerId());
 				order.setCustomerId(this.cartManager.getCartById(ids).getCustomerId());
@@ -69,6 +77,30 @@ public class CartItemController {
 		return "redirect:/order.htm";
 	}
 
+
+/*	@RequestMapping(value="/checkout", method=RequestMethod.POST)
+	public String checkout(HttpServletRequest httpServletRequest) {	
+		System.out.println(select[1]);
+		if(select !=null && select.length!=0) {
+			for(int i=0;i<select.length;i++) {
+				OrderTable order = new OrderTable();
+				order.setDescription(this.cartManager.getCartById(Integer.parseInt(select[i])).getDescription());
+				order.setQuantity(this.cartManager.getCartById(Integer.parseInt(select[i])).getQuantity());
+				order.setPrice(this.cartManager.getCartById(Integer.parseInt(select[i])).getPrice());
+				order.setName(this.cartManager.getCartById(Integer.parseInt(select[i])).getName());
+				order.setStatus("Not confirmed");
+				order.setItemId(Integer.parseInt(select[i]));
+				order.setSellerId(this.cartManager.getCartById(Integer.parseInt(select[i])).getSellerId());
+				order.setCustomerId(this.cartManager.getCartById(Integer.parseInt(select[i])).getCustomerId());
+				order.setLocation(httpServletRequest.getParameter("location"));
+				order.setTime(httpServletRequest.getParameter("time"));
+				order.setContact(httpServletRequest.getParameter("contact"));
+				this.orderManager.addOrder(order);
+			}
+        }
+		
+		return "redirect:/order.htm";
+	}*/
 	
 	/*@RequestMapping(value="/checkout")
 	public String checkout(@RequestParam("foo") int id[], Model uiModel) {
@@ -126,15 +158,7 @@ public class CartItemController {
 		
 		return "edit";
 	}
-	/*@RequestMapping(value="/edit/**", method=RequestMethod.POST)
-	public String editCart(@PathVariable("id") int id, @PathVariable("quantity") int quantity) {
-		
-		Cart cart = this.cartManager.editQuantity(quantity, id);
-		this.cartManager.updateCart(cart);
-		System.out.println(cart.getId());
-		
-		return "redirect:/cart.htm";
-	}*/
+
 	@RequestMapping(value="/edit/**", method=RequestMethod.POST)
 	public String editCart(@Valid int quantity, @ModelAttribute("cart") Cart cart) {
 		

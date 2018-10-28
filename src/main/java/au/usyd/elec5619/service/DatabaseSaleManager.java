@@ -26,7 +26,6 @@ public class DatabaseSaleManager implements SaleManager{
 			orders.setStatus("Not completed");
 		}
 		else if(state.equals("Not completed")) {
-			orders.setStatus("Delivered");
 		}
 		else if(state.equals("Delivered")) {
 		}

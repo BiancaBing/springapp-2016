@@ -21,15 +21,6 @@
 	 		    checkboxes[i].checked = source.checked;
 	 		  }
 	 		}
-	 		
-	 		function confirmd() {  
-	 			            var msg = "Decide to delete?";  
-	 			            if (confirm(msg)==true){  
-	 			                return true;  
-	 			            }else{  
-	 			                return false;  
-	 			            }  
-	 			        }  
 		</script>
 		
 		<a href="cart.htm">cart</a> | <a href="order.htm">order</a> | <a href="sale.htm">sales record</a>
@@ -43,7 +34,7 @@
 		<h3>Items</h3>
 		<sf:form method="POST" modelAttribute="cart">
 		<c:forEach items="${model.carts}" var="prod">
-			<input name="foo" type="checkbox" value="${prod.id}"/>
+			<!-- input name="foo" type="checkbox" value="${prod.id}"/-->
 				<c:out value="name: ${prod.name}" /> | 
 				<c:out value="description: ${prod.description}" /> | 
 				<c:out value="seller: ${prod.seller}" /> |
@@ -58,10 +49,10 @@
 		
 		
 		
-	<!--  <input type="checkbox" onClick="selectall(this)" /> Select All<br/>
+	<!--    <input type="checkbox" onClick="selectall(this)" /> Select All<br/>
 		</sf:form>
 		
-				<a href="cart/checkout">checkout</a>-->
+				<a href="cart/checkout">checkout</a> --> 
 		
 		<a href="cart/add/${prod.id }">add</a>  
 	

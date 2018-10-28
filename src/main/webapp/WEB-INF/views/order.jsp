@@ -28,7 +28,7 @@
 				<c:out value="quantity: ${ord.quantity}" /> | 
 				<c:out value="status: ${ord.status}" /> | 
 				<i>$<c:out value="price: ${ord.price}" /></i>
-			<th><a href="order/change/${ord.id }"><input type="button" value="${ord.review}" /></a></th>        
+			<th><a href="order/change/${ord.id }"><input type="button" value="${ord.orderprint}" /></a></th>        
 			<br>
 			<br>
 		</c:forEach>

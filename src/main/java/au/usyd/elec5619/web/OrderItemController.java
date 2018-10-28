@@ -37,58 +37,34 @@ public class OrderItemController {
 	@RequestMapping(value="/change/{id}/**", method=RequestMethod.GET)
 	public String ChangeState(@PathVariable("id") int id,Model uiModel) {
 		
-		OrderTable o = this.orderManager.getOrderById(id);
-		String state = o.getStatus();
+		OrderTable order = this.orderManager.getOrderById(id);
+		String state = order.getStatus();
 		if(state.equals("Delivered")) {
-			this.orderManager.changeState(state, id);
-			uiModel.addAttribute("order", o);
+			uiModel.addAttribute("order", order);
+			
 			return "review_customer";
 		}
 		else if(state.equals("Not confirmed")) {
-			this.orderManager.changeState(state, id);
 			this.orderManager.deleteOrder(id);
 		}
 		else if(state.equals("Not completed")) {
 			this.orderManager.changeState(state, id);
 		}
-		System.out.println(id);
-		System.out.println(state);
 		return "redirect:/order.htm";
 		
 	}
 	
 	@RequestMapping(value="/change/review", method=RequestMethod.POST)
-	public String addReview(HttpServletRequest httpServletRequest, @ModelAttribute("review") OrderTable o) {
-		
-		String review=httpServletRequest.getParameter("review");
-		o.setReview(review);
-		return "redirect:/order.htm";
-	}
-	
-/*	@RequestMapping(value="/change/{id}/{status}", method=RequestMethod.GET)
-	public String ChangeState(@PathVariable("id") int id, @PathVariable("status") String state,Model uiModel) {
-		
-		Orders o = this.orderManager.getOrderById(id);
-		if(state=="Delivered") {
-			this.orderManager.changeState(state, id);
-			System.out.println("sssss");
-			return "review_customer";
-		}
-		else if(state=="Not confirmed") {
-			this.orderManager.changeState(state, id);
-			System.out.println("sssss");
-			this.orderManager.deleteOrder(id);
-			return "redirect:/order";
-		}
-		else if(state=="Not completed") {
-			this.orderManager.changeState(state, id);
-			System.out.println("sssss");
-			return "redirect:/order.htm";
-		}
+	public String addReview(HttpServletRequest httpServletRequest,@ModelAttribute("order") OrderTable order) {
+		int id=order.getId();
+		OrderTable o=new OrderTable();
+		o=this.orderManager.getOrderById(id);
+		String state=o.getStatus();
+		o.setReview(httpServletRequest.getParameter("review"));
+		this.orderManager.updateOrder(o);
 		this.orderManager.changeState(state, id);
 		return "redirect:/order.htm";
-		
-	}*/
+	}
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
 	public String deleteCart(@PathVariable("id") int id) {
@@ -105,14 +81,6 @@ public class OrderItemController {
 		System.out.println(product.getId());
 		
 		return "redirect:/order.htm";
-	}
-	
-	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
-	public String deleteProduct(@PathVariable("id") int id) {
-		
-		this.productManager.deleteProduct(id);
-		
-		return "redirect:/cart.htm";
 	}*/
 	
 }

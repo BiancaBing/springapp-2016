@@ -10,11 +10,14 @@
 	<body>
 			
 		<h1>Product Review:</h1>
-		<form action="review" method="post" modelAttribute="order">
-			 <input type="text" name="review" />
-			 <br>
-			 <br>
-			<input type="submit" value="Add"/>
-		</form>
+		<sf:form action="review" method="post" modelAttribute="order">
+			<c:foreach item="${model.order}" var="info">
+				 <input type="text" name="review" />
+				 <br>
+				 <br>
+				 <td><sf:hidden path="id"/>
+				<input type="submit" value="Add"/>
+			</c:foreach>
+		</sf:form>
 	</body>
 </html>

@@ -30,27 +30,51 @@ public class SalesItemController {
 
 	@Resource(name="saleManager")
 	private SaleManager saleManager;
+	@Resource(name="orderManager")
+	private OrderManager orderManager;
 	
-	@RequestMapping(value="/change/{id}/**", method=RequestMethod.GET)
+	@RequestMapping(value="/change/{id}", method=RequestMethod.GET)
 	public String ChangeState(@PathVariable("id") int id,Model uiModel) {
 		
-		OrderTable s = this.saleManager.getSaleById(id);
-		String state = s.getStatus();
+		OrderTable sale = this.saleManager.getSaleById(id);
+		System.out.println(sale.getLocation());
+		String state = sale.getStatus();
 		if(state.equals("Delivered")) {
-			this.saleManager.changeState(state, id);
-			return "review_customer";
+			uiModel.addAttribute("sale", sale);
+			OrderTable o=new OrderTable();
+			o=this.saleManager.getSaleById(id);
+			return "review_seller";
 		}
 		else if(state.equals("Not confirmed")) {
-			this.saleManager.changeState(state, id);
-			this.saleManager.deleteSale(id);
+			//this.saleManager.changeState(state, id);
+			uiModel.addAttribute("sale", sale);
+			OrderTable o=new OrderTable();
+			o=this.saleManager.getSaleById(id);
+			//uiModel.asMap().put("info", o);
+			return "order_details";
 		}
 		else if(state.equals("Not completed")) {
-			this.saleManager.changeState(state, id);
+			uiModel.addAttribute("sale", sale);
+			OrderTable o=new OrderTable();
+			o=this.saleManager.getSaleById(id);
+			return "order_details";
 		}
-		System.out.println(id);
-		System.out.println(state);
-		return "redirect:/order.htm";
+		return "redirect:/sale.htm";
 		
 	}
 	
+	@RequestMapping(value="/change/{id}", method=RequestMethod.POST)
+	public String editCart(@ModelAttribute("sale") OrderTable order) {
+		
+		//order = this.orderManager.editQuantity(quantity, id);
+		//String state=order.getStatus();
+		int id=order.getId();
+		System.out.println(id);
+		OrderTable o=new OrderTable();
+		o = this.saleManager.getSaleById(id);
+		//o=this.orderManager.getOrderById(id);
+		String state=o.getStatus();		
+		this.saleManager.changeState(state, id);
+		return "redirect:/sale.htm";
+	}
 }
