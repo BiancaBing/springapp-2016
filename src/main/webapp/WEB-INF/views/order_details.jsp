@@ -87,7 +87,7 @@
 		        });
 		      }
    		 </script>
-    	 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdnvWJa8Uwn0dC5-R6g1BK13kyH_q0Gvk&callback=initMap"
+    	 <script src="https://maps.googleapis.com/maps/api/js?key=<<<<<yourkey>>>>>>&callback=initMap"
     async defer></script>		
 			<sf:form method="POST" modelAttribute="sale">
 			<fieldset>
